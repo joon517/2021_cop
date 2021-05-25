@@ -1,0 +1,22 @@
+{
+  "name": "bitcoin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "dependencies": {
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0",
+    "winston": "^3.3.3",
+    "axios": "^0.21.1",
+    "uuidv4": "^6.2.6",
+    "jsonwebtoken": "^8.5.1",
+    "querystring": "^0.2.1",
+    "crypto": "^1.0.1"
+  },
+  "license": "ISC"
+}
