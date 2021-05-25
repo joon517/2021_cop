@@ -1,10 +1,16 @@
 # Back-End 구조 소개
 
+## Node version
+> 12.15.0
+
+## NPM version
+> 6.13.4
+
 ## 서버 구동
 ```
 node server
 ```
-
+***
 ## 폴더 구조
 
 > routes
