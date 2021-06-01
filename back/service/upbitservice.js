@@ -94,13 +94,13 @@ exports.getUpbitBTCPrice = async (req, res) => {
         res.json(moveCoins)
 }
 
-exports.getUpbitETHPrice = (req, res) => {
+exports.getUpbitETHPrice = async (req, res) => {
     axios.get('https://www.naver.com')
         .then(console.log('geteth'))
         .catch(console.error('get eth error'))
 }
 
-exports.getUpbitXRPPrice = (req, res) => {
+exports.getUpbitXRPPrice = async (req, res) => {
     axios.get('https://www.naver.com')
         .then(console.log('getxrp'))
         .catch(console.error('get xrp error'))
@@ -108,7 +108,7 @@ exports.getUpbitXRPPrice = (req, res) => {
 
 // 내 계좌 조회하기 
 // 뭐를 얼만큼 들고있는지 조회
-exports.getUpbitAccount = (req, res) => {
+exports.getUpbitAccount = async (req, res) => {
     axios.get('https://api.upbit.com/v1/accounts?'.concat(query), {
         headers: {
             Authorization: `Bearer ${token}`
@@ -124,7 +124,7 @@ exports.getUpbitAccount = (req, res) => {
 }
 
 // KRW-BTC 시장에서 주문 가능 정보 조회
-exports.getOrderChanceKRWBTC = (req, res) => {
+exports.getOrderChanceKRWBTC = async (req, res) => {
     axios.get('https://api.upbit.com/v1/orders/chance?'.concat(query), {
         headers: {
             Authorization: `Bearer ${token}`
@@ -139,6 +139,6 @@ exports.getOrderChanceKRWBTC = (req, res) => {
 }
 
 // 처음 10분 데이터를 만들기 위한 init 작업
-exports.upbitInit = (req, res) => {
+exports.upbitInit = async (req, res) => {
 
 }
