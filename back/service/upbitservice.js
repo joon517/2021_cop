@@ -4,7 +4,7 @@ const sign = require('jsonwebtoken').sign
 const queryEncode = require('querystring').encode
 const crypto = require('crypto')
 
-
+//TODO process.env 처리
 const AccessKey = `MxeD38maMKcYnCL7KO1vWMOF6EuF60jBoXy4wIXM`
 const SecretKey = `xPAKWhNIcrW9JhuUrVLCxamDjyxUEn2f414KDvSE`
 
