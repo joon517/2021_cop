@@ -1,25 +1,25 @@
 const upbitService = require('../../service/upbitservice');
 
-exports.getUpbitBTCPrice = (req, res) => {
-   upbitService.getUpbitBTCPrice(req, res);
+exports.getUpbitBTCPrice = async (req, res) => {
+  await upbitService.getUpbitBTCPrice(req, res);
 }
 
-exports.getUpbitETHPrice = (req, res) => {
-  upbitService.getUpbitETHPrice(req, res);
+exports.getUpbitETHPrice = async (req, res) => {
+  await upbitService.getUpbitETHPrice(req, res);
 }
 
-exports.getUpbitXRPPrice = (req, res) => {
-  upbitService.getUpbitXRPPrice(req, res);
+exports.getUpbitXRPPrice = async (req, res) => {
+  await upbitService.getUpbitXRPPrice(req, res);
 }
 
-exports.getUpbitAccount = (req, res) => {
-  upbitService.getUpbitAccount(req, res);
+exports.getUpbitAccount = async (req, res) => {
+  await upbitService.getUpbitAccount(req, res);
 }
 
-exports.upbitInit = (req, res) => {
-  upbitService.upbitInit(req, res);
+exports.upbitInit = async (req, res) => {
+  await upbitService.upbitInit(req, res);
 }
 
-exports.getUpbitOrderChance = (req, res) => {
-  upbitService.getOrderChanceKRWBTC(req, res);
+exports.getUpbitOrderChance = async (req, res) => {
+  await upbitService.getOrderChanceKRWBTC(req, res);
 }
