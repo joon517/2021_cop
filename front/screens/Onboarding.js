@@ -37,11 +37,11 @@ class Onboarding extends React.Component {
                     Design
                   </Text>
                 </Block>
-                <Block>
+                {/* <Block>
                   <Text color="white" size={60}>
                     System
                   </Text>
-                </Block>
+                </Block> */}
                 <Block style={styles.subTitle}>
                   <Text color="white" size={16}>
                     Fully coded React Native components.

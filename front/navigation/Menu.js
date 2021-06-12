@@ -8,16 +8,16 @@ import {
 import { Block, Text, theme } from "galio-framework";
 
 import Images from "../constants/Images";
-import { DrawerItem as DrawerCustomItem } from '../../components';
+import { DrawerItem as DrawerCustomItem } from '../components';
 
-function CustomDrawerContent({ drawerPosition, navigation, profile, focused, state, ...rest }) {
+function CustomDrawerContent({ drawerPosition, navigation, rofile, focused, state, ...rest }) {
   const insets = useSafeArea();
   const screens = [
     "Home", 
-    "Profile",
+    // "Profile",
     "Account",
-    "Elements",
-    "Articles",
+    // "Elements",
+    // "Articles",
   ];
   return (
     <Block
@@ -31,6 +31,11 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
         <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
           {screens.map((item, index) => {
               return (
+                // <DrawerCustomItem
+                //   title={item}
+                //   key={index}
+                //   focused={state.index === index ? true : false}
+                // />
                 <DrawerCustomItem
                   title={item}
                   key={index}

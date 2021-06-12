@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Font from 'expo-font';
-// import { createIconSetFromIcoMoon } from '@expo/vector-icons';
+import { createIconSetFromIcoMoon } from '@expo/vector-icons';
 import { Icon } from 'galio-framework';
 
 import argonConfig from '../assets/config/argon.json';
