@@ -63,6 +63,3 @@ const DBConnect = () => {
     return;
 }
 
-// createDB()
-makeTable()
-// DBConnect()
