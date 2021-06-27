@@ -9,6 +9,7 @@ const pool = mariadb.createPool({
     password:"210504cop!"
 })
 
+// 테이블 만드는 함수
 const makeTable = () => {
     pool.getConnection()
     .then(conn => {
