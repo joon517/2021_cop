@@ -1,4 +1,5 @@
 <template>
+<v-container fluid>
   <!-- <v-card
     class="mx-auto"
     style="max-width: 500px; height:810px;"
@@ -225,6 +226,12 @@
     </v-dialog> -->
     
     
+    <!-- <v-bottom-navigation
+        :value="value"
+        color="teal"
+        grow
+        style="position: fixed"
+      > -->
     <v-bottom-navigation
         :value="value"
         color="teal"
@@ -232,16 +239,24 @@
         style="position: fixed"
       >
         <v-btn>
-          <span>Recents</span>
-          <v-icon>mdi-history</v-icon>
+          <!-- <span>Recents</span> -->
+          <v-icon>mdi-home</v-icon>
         </v-btn>
         <v-btn>
-          <span>Favorites</span>
-          <v-icon>mdi-heart</v-icon>
+          <!-- <span>Favorites</span> -->
+          <v-icon>mdi-magnify</v-icon>
         </v-btn>
         <v-btn>
-          <span>Nearby</span>
-          <v-icon>mdi-map-marker</v-icon>
+          <v-icon>
+            mdi-plus
+          </v-icon>
+        </v-btn>
+        <v-btn>
+          <!-- <span>Nearby</span> -->
+          <v-icon>mdi-bookmark</v-icon>
+        </v-btn>
+        <v-btn>
+          <v-icon>mdi-face</v-icon>
         </v-btn>
       </v-bottom-navigation>
 
@@ -250,26 +265,27 @@
 
 
   </div>
+</v-container>
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      agreement: false,
-      bio: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts',
-      dialog: false,
-      email: undefined,
-      form: false,
-      isLoading: false,
-      password: undefined,
-      phone: undefined,
-      rules: {
-        email: v => !!(v || '').match(/@/) || 'Please enter a valid email',
-        length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
-        password: v => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
-          'Password must contain an upper case letter, a numeric character, and a special character',
-        required: v => !!v || 'This field is required',
-      },
-    }),
-  }
+//   export default {
+//     data: () => ({
+//       agreement: false,
+//       bio: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts',
+//       dialog: false,
+//       email: undefined,
+//       form: false,
+//       isLoading: false,
+//       password: undefined,
+//       phone: undefined,
+//       rules: {
+//         email: v => !!(v || '').match(/@/) || 'Please enter a valid email',
+//         length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
+//         password: v => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
+//           'Password must contain an upper case letter, a numeric character, and a special character',
+//         required: v => !!v || 'This field is required',
+//       },
+//     }),
+//   }
 </script>
