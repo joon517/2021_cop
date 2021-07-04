@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import New from '../views/New.vue'
+import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
     path: '/new',
     name: 'New',
     component: New
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 ]
 
