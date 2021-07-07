@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-exports.getBinanceBTCApi = (req, res) => {
+exports.getBinanceBTC = (req, res) => {
     console.log('binance btc service');
     axios.get('https://www.binance.com/api/v3/ticker/price')
     .then( (response) => {
@@ -12,13 +12,13 @@ exports.getBinanceBTCApi = (req, res) => {
     res.json('success BTC API')
 }
 
-exports.getBinanceETHApi = (req, res) => {
+exports.getBinanceETH = (req, res) => {
     axios.get('https://www.naver.com')
     .then(console.log('geteth'))
     .catch(console.error('get eth error'))
 }
 
-exports.getBinanceXRPApi = (req, res) => {
+exports.getBinanceXRP = (req, res) => {
     axios.get('https://www.naver.com')
     .then(console.log('getxrp'))
     .catch(console.error('get xrp error'))

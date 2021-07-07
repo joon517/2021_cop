@@ -2,25 +2,25 @@ const express = require('express');
 const router = express.Router();
 
 // Import Function
-const func = require('../../controllers/upbit/upbit')
+const upbitService = require('../../service/upbitservice');
 
 //http://localhost:3000/app/v1/upbit/getUpbitBTCPrice
 router.get('/getUpbitBTC', async (req, res) => {
-    await func.getUpbitBTCPrice(req, res);
+    await upbitService.getUpbitBTCPrice(req, res);
 });
 
 //http://localhost:3000/app/v1/upbit/getUpbitAccount
 router.get('/getUpbitAccount', async (req, res) => {
-    await func.getUpbitAccount(req, res);
+    await upbitService.getUpbitAccount(req, res);
 })
 
 //http://localhost:3000/app/v1/upbit/getUpbitOrderChance
-router.get('/getUpbitOrderChance', async (req, res) => {
-    await func.getOrderChance(req, res);
+router.get('/getUpbitOrderChanceKRWBTC', async (req, res) => {
+    await upbitService.getOrderChanceKRWBTC(req, res);
 })
 
 router.get('/upbitInit', async (req, res) => {
-    await func.upbitInit(req, res);
+    await upbitService.upbitInit(req, res);
 })
 
 router.get('/', async (req, res) => {
