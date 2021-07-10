@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 // Import Function
-const func = require('../../controllers/binance/binance')
+const binanceService = require('../../service/binanceservice');
 
 //http://localhost:3000/app/v1/binance/getBinanceBTC
 router.get('/getBinanceBTC', (req, res) => {
-    func.getBinanceBTC(req, res);
+    binanceService.getBinanceBTC(req, res);
 });
 
 router.get('/', (req, res) => {

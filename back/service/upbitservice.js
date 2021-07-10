@@ -4,7 +4,7 @@ const sign = require('jsonwebtoken').sign
 const queryEncode = require('querystring').encode
 const crypto = require('crypto')
 
-
+//TODO process.env 처리
 const AccessKey = `MxeD38maMKcYnCL7KO1vWMOF6EuF60jBoXy4wIXM`
 const SecretKey = `xPAKWhNIcrW9JhuUrVLCxamDjyxUEn2f414KDvSE`
 
@@ -94,13 +94,13 @@ exports.getUpbitBTCPrice = async (req, res) => {
         res.json(moveCoins)
 }
 
-exports.getUpbitETHPrice = async (req, res) => {
+exports.getUpbitETHPrice = (req, res) => {
     axios.get('https://www.naver.com')
         .then(console.log('geteth'))
         .catch(console.error('get eth error'))
 }
 
-exports.getUpbitXRPPrice = async (req, res) => {
+exports.getUpbitXRPPrice = (req, res) => {
     axios.get('https://www.naver.com')
         .then(console.log('getxrp'))
         .catch(console.error('get xrp error'))
@@ -108,7 +108,7 @@ exports.getUpbitXRPPrice = async (req, res) => {
 
 // 내 계좌 조회하기 
 // 뭐를 얼만큼 들고있는지 조회
-exports.getUpbitAccount = async (req, res) => {
+exports.getUpbitAccount = (req, res) => {
     axios.get('https://api.upbit.com/v1/accounts?'.concat(query), {
         headers: {
             Authorization: `Bearer ${token}`
@@ -124,7 +124,7 @@ exports.getUpbitAccount = async (req, res) => {
 }
 
 // KRW-BTC 시장에서 주문 가능 정보 조회
-exports.getOrderChanceKRWBTC = async (req, res) => {
+exports.getOrderChanceKRWBTC = (req, res) => {
     axios.get('https://api.upbit.com/v1/orders/chance?'.concat(query), {
         headers: {
             Authorization: `Bearer ${token}`
@@ -139,6 +139,6 @@ exports.getOrderChanceKRWBTC = async (req, res) => {
 }
 
 // 처음 10분 데이터를 만들기 위한 init 작업
-exports.upbitInit = async (req, res) => {
+exports.upbitInit = (req, res) => {
 
 }
