@@ -73,6 +73,7 @@
       <v-btn
         text
         color="black"
+        @click="save()"
       >
         등록
       </v-btn>
@@ -80,7 +81,7 @@
     <hr>
     <v-form
       ref="form"
-      v-model="form"
+      v-model="valid"
       class="pa-4 pt-6"
     >
 
@@ -116,9 +117,11 @@
       <!-- </div> -->
       
       <v-text-field
+          v-model="title"
           placeholder="글 제목"
       ></v-text-field>
       <v-textarea
+          v-model="content"
           name="input-7-1"
           placeholder="내용을 작성해주세요."
       ></v-textarea>
@@ -288,4 +291,29 @@
 //       },
 //     }),
 //   }
+  import axios from 'axios'
+
+  export default{
+    data(){
+      return{
+        title: '',
+        content: '',
+        // newForm = Object.assign({
+        //   title: '',
+        //   content: '',
+        // })
+      }
+    },
+    methods: {
+      save(){
+        // this.newForm.title = this.title;
+        // this.newForm.content = this.content;
+        axios.post(`app/v1/upload/board`, {
+          title: this.title,
+          content: this.content
+          })
+          .then(res => console.log(res))
+      },
+    }
+  }
 </script>

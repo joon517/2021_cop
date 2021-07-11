@@ -38,6 +38,13 @@
                 >
                 Sign Up
                 </v-btn>
+
+                <v-btn
+                color="gray"
+                @click="Kakao"
+                >
+                Kakao Login
+                </v-btn>
             </v-form>
         </v-col>
       </v-row>
@@ -46,6 +53,8 @@
 </template>
 
 <script>
+  import axios from 'axios'
+
   export default {
     data: () => ({
       valid: true,
@@ -59,14 +68,25 @@
         v => !!v || 'Password is required',
         v => (v && v.length <= 10) || 'Password must be valid',
       ],
+      userId: '',
+      // password: '',
     }),
 
     methods: {
       login () {
-        this.$refs.form.login()
+        // this.$refs.form.login()
+        axios.post(`app/v1/auth/normal`, {
+          userId: this.userId,
+          password: this.password
+          })
+          .then(res => console.log(res))
       },
       SignUp () {
         this.$refs.form.SignUp()
+      },
+      Kakao () {
+        axios.get(`app/v1/auth/kakao`)
+          .then(res => console.log(res))
       },
     },
   }
