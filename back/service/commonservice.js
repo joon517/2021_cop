@@ -1,66 +1,85 @@
 const mariadb = require('mariadb')
+const queryString = require('../models/query')
+
 
 //TODO procces.env처리
 const pool = mariadb.createPool({
-    host:"fastmvpcoptemp.clwoq4w3amdc.us-east-2.rds.amazonaws.com",
-    user:"admin",
+    host: "127.0.0.1", 
+    user:  process.env.USER, 
     port:3306,
-    database:"tmp",
-    password:"210504cop!"
+    database:"mysql",
+    password: "!qksgufahs2" 
 })
+
+// 테이블 삭제
+const dropTable = () => {
+    pool.getConnection()
+    .then(conn => {
+        for ( var i = 0 ; i < queryString.dropTableQuery.dropAllTables.length; i++){
+            console.log(`DROP TABLE IF EXISTS ${queryString.dropTableQuery.dropAllTables[i]};`)
+            conn.query(`DROP TABLE IF EXISTS ${queryString.dropTableQuery.dropAllTables[i]};`)
+            .catch(err => console.error(err))
+        }
+        conn.end()
+    })
+    .catch(err => {
+        console.error(err)
+        conn.end();
+    })
+    return;
+}
 
 // 테이블 만드는 함수
 const makeTable = () => {
     pool.getConnection()
     .then(conn => {
-        conn.query(
-            `
-            DROP TABLE IF EXISTS BoardInfo;
-            CREATE TABLE BoardInfo
-            (
-                user_id int(11) not null primary key,
-                titles varchar(20) not null,
-                content text(2000) not null,
-                username varchar(20) not null,
-                uploadDate varchar(20) not null,
-                likes int(11) not null
-            );
-            SELECT * FROM BoardInfo;
-            `
-        )
+        // rows = conn.query('show tables;')
+        // .then(res => {
+        //     console.log(res);
+        // })
+        for (var input in queryString.tableCreateQuery) {
+            console.log(queryString.tableCreateQuery[input])
+            conn.query(queryString.tableCreateQuery[input])
+            .catch(err => {
+                console.error(err);
+            })
+        }
+        conn.end();
+    })
+    .catch(err => {
+        console.error(err)
+        conn.end();
+    })
+    return;
+}
+
+const temp = () => {
+    pool.getConnection()
+    .then(conn => {
+        console.log(queryString.tableCreateQuery.boardCommonTableCreateQuery)
+        conn.query(queryString.tableCreateQuery.boardCommonTableCreateQuery)
         .catch(err => {
-            console.error(err)
-            // TODO res 함수 파라미터에 추가
-            // res.send("Create BoardInfo table error")
-            conn.end()
+            console.error(err);
         })
-        .then( conn.end());
     })
     .catch(err => {
         console.error(err)
     })
-
     return;
 }
 const DBConnect = () => {
     pool.getConnection()
     .then(conn => {
         console.log("connection try")
-        console.log("Connection Success")
-        console.log(conn)
-        conn.query(`show grants for admin;`)
-            .then(rows => {
-                console.log(rows)
-                conn.end()
-            })
-            .catch(err => {
-                console.error(err)
-                conn.release()
-            })
+        // conn.query(queryString.tableCreateQuery.boardCommonTableCreateQuery);
     })
     .catch(err => {
         console.error(err)
+        conn.end();
+        return;
     })
     return;
 }
 
+dropTable();
+makeTable();

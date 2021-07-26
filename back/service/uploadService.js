@@ -12,6 +12,3 @@ exports.uploadComment = (req, res) => {
     // TODO 댓글 업로드 기능 구현
 }
 
-exports.uploadBookmark = (req, res) => {
-    // TODO 북마크 업로드 기능 구현
-}
