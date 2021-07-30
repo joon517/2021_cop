@@ -54,5 +54,4 @@ router.get('/', async (req, res) => {
     res.status(404).send("Wrong")
 })
 
-router.
 module.exports = router;

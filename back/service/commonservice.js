@@ -53,20 +53,6 @@ const makeTable = () => {
     return;
 }
 
-const temp = () => {
-    pool.getConnection()
-    .then(conn => {
-        console.log(queryString.tableCreateQuery.boardCommonTableCreateQuery)
-        conn.query(queryString.tableCreateQuery.boardCommonTableCreateQuery)
-        .catch(err => {
-            console.error(err);
-        })
-    })
-    .catch(err => {
-        console.error(err)
-    })
-    return;
-}
 const DBConnect = () => {
     pool.getConnection()
     .then(conn => {
@@ -81,5 +67,23 @@ const DBConnect = () => {
     return;
 }
 
-dropTable();
-makeTable();
+
+const temp = () => {
+    const req = {
+        body : {
+            post_id : "user0001",
+            title : "hello world",
+            content : "something",
+            username : "ywk", 
+            date : "2021-07-30",
+            category : "shortPost", 
+            pics : "lsdkdjlf.png",
+            files : "sldkjlsf.png"
+        }
+    }
+    const result = queryString.tableInsertQuery.boardCommonTableInsertQuery(req);
+    console.log(result);
+}
+
+// dropTable();
+// makeTable();

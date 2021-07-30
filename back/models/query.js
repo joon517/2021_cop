@@ -177,7 +177,7 @@ const tableCreateQuery = {
 
 const tableInsertQuery = {
     boardCommonTableInsertQuery: (req) => {
-        return
+        return ( 
         `
             insert into boardcommon values (
                 ${req.body.post_id},
@@ -195,10 +195,10 @@ const tableInsertQuery = {
                 false,
                 false
             );
-        `
+        `)
     },
     commentsTableInsertQuery: (req) => {
-        return
+        return (
         `
             insert into comments values (
                 ${req.body.post_id},
@@ -215,10 +215,10 @@ const tableInsertQuery = {
                 false,
                 false
             );
-        `
+        `)
     },
     voteBoardTableInsertQuery: (req) => {
-        return
+        return (
         `
             insert into voteboard values (
                 ${req.body.vote_id},
@@ -227,10 +227,10 @@ const tableInsertQuery = {
                 0,
                 0
             );
-        `
+        `)
     },
     userTableInsertQuery: (req) => {
-        return
+        return (
         `
             insert into user values (
                 ${req.body.user_id},
@@ -246,28 +246,28 @@ const tableInsertQuery = {
                 '',
                 ''
             );
-        `
+        `)
     },
     bookmarkListTableInsertQuery: (req) => {
-        return
+        return (
         `
             insert into bookmarklist values (
                 ${req.body.user_id},
                 \'${req.body.bookmark_post_url}\'
             );
-        `
+        `)
     },
     writePostTableInsertQuery: (req) => {
-        return
+        return (
         `
             insert into writepost values (
                 ${req.body.user_id},
                 \'${req.body.post_url}\',
             );
-        `
+        `)
     },
     coinAssetListTableInsertQuery: (req) => {
-        return
+        return (
         `
             insert into coinassetlist values (
                 ${req.body.user_id},
@@ -275,10 +275,10 @@ const tableInsertQuery = {
                 \'${req.body.coin_asset_name}\',
                 ${req.body.coin_asset_value}
             );
-        `
+        `)
     },
     stockAssetListTableInsertQuery: (req) => {
-        return
+        return (
         `
             insert into stockassetlist values (
                 ${req.body.user_id},
@@ -287,10 +287,10 @@ const tableInsertQuery = {
                 \'${req.body.stock_name}\',
                 ${req.body.stock_value}
             );
-        `
+        `)
     },
     rankingTableInsertQuery: (req) => {
-        return
+        return (
         `
             insert into ranking values (
                 ${req.body.user_id},
@@ -302,10 +302,10 @@ const tableInsertQuery = {
                 \'${req.body.rank5_id}\',
                 
             );
-        `
+        `)
     },
     shortPostTableInsertQuery: (req) => {
-        return
+        return (
         `
             insert into shortpost values (
                 ${req.body.short_post_id},
@@ -313,78 +313,78 @@ const tableInsertQuery = {
                 0,
                 0
             )
-        `
+        `)
     },
     followingTableInsertQuery: (req) => {
-        return
+        return (
         `
             insert into following values (
                 ${req.body.user_id},
                 \'${req.body.following_id}\'
             );
-        `
+        `)
     },
     followerTableInsertQuery: (req) => {
-        return
+        return (
         `
             insert into follower values (
                 ${req.body.user_id},
                 \'${req.body.follower_id}\'
             );
-        `
+        `)
     },
     virtualAccountNumberListTableInsertQuery: (req) => {
-        return
+        return (
         `
             insert into virtualaccountnumberlist values (
                 ${req.body.user_id},
                 \'${req.body.virtual_account_number}\',
                 \'${req.body.securities_firm_name}\'
             );
-        `
+        `)
     }
 }
 
 const updateQuery = {
     // TODO 업데이트하는 쿼리 추가
     likesUpdateQuery: (req) => {
-        return
+        return (
         `
         update ${req.table} set likes = likes + 1 where postid = \'${req.postid}\';
-        `
+        `)
     },
     dislikesUpdateQuery: (req) => {
-        return
+        return (
         `
         update ${req.table} set dislikes = dislikes + 1 where postid = \'${req.postid}\';
-        `
+        `)
     },
     voteYesUpdateQuery: (req) => {
-        return
+        return (
         `
         update VoteBoard set yes = yes + 1 where voteid = \'${req.voteid}\';
-        `
+        `)
     },
     voteYesUpdateQuery: (req) => {
-        return
+        return (
         `
             update VoteBoard set no = no + 1 where voteid = \'${req.voteid}\';
-        `
+        `)
     }
 }
 
 const deleteQuery = {
     followingTableDropQuery: (req) => {
-        return
+        return (
         `
             Delete from following where userid = \'${req.userid}\' and followingid = \'${req.followingid}\';
-        `
+        `)
     },
     followerTableDropQuery: (req) => {
-        return
+        return (
         `
             Delete from follower where userid = \'${req.userid}\' and followerid = \'${req.followerid}\';
-        `
+        `)
     }
 }
 
