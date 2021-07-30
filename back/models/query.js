@@ -6,6 +6,7 @@ const dropTableQuery = {
 }
 
 const tableCreateQuery = {
+    // TODO 자주 쓰이는 컬럼 쪼개기
     boardCommonTableCreateQuery :
     `CREATE TABLE boardcommon
     (
@@ -176,69 +177,69 @@ const tableCreateQuery = {
 }
 
 const tableInsertQuery = {
-    boardCommonTableInsertQuery: (req) => {
+    boardCommonTableInsertQuery: (body) => {
         return ( 
         `
             insert into boardcommon values (
-                ${req.body.post_id},
-                \'${req.body.title}\',
-                \'${req.body.content}\',
-                \'${req.body.username}\',
-                \'${req.body.date}\',
+                ${body.post_id},
+                \'${body.title}\',
+                \'${body.content}\',
+                \'${body.username}\',
+                \'${body.date}\',
                 0,
                 0,
-                \'${req.body.category}\',
+                \'${body.category}\',
                 false,
                 0,
-                ${req.body.pics},
-                ${req.body.files},
+                ${body.pics},
+                ${body.files},
                 false,
                 false
             );
         `)
     },
-    commentsTableInsertQuery: (req) => {
+    commentsTableInsertQuery: (body) => {
         return (
         `
             insert into comments values (
-                ${req.body.post_id},
-                ${req.body.comment_id},
-                \'${req.body.content}\',
-                \'${req.body.username}\',
-                \'${req.body.date}\',
+                ${body.post_id},
+                ${body.comment_id},
+                \'${body.content}\',
+                \'${body.username}\',
+                \'${body.date}\',
                 0,
                 0,
                 false,
                 0,
-                ${req.body.pics},
-                ${req.body.files},
+                ${body.pics},
+                ${body.files},
                 false,
                 false
             );
         `)
     },
-    voteBoardTableInsertQuery: (req) => {
+    voteBoardTableInsertQuery: (body) => {
         return (
         `
             insert into voteboard values (
-                ${req.body.vote_id},
-                \'${req.body.vote_name}\',
-                \'${req.body.username}\',
+                ${body.vote_id},
+                \'${body.vote_name}\',
+                \'${body.username}\',
                 0,
                 0
             );
         `)
     },
-    userTableInsertQuery: (req) => {
+    userTableInsertQuery: (body) => {
         return (
         `
             insert into user values (
-                ${req.body.user_id},
-                \'${req.body.username}\',
-                \'${req.body.password}\',
-                ${req.body.is_valid_asset}
-                \'${req.body.badge}\',
-                \'${req.body.personal_info_openrule}\',
+                ${body.user_id},
+                \'${body.username}\',
+                \'${body.password}\',
+                ${body.is_valid_asset}
+                \'${body.badge}\',
+                \'${body.personal_info_openrule}\',
                 0,
                 0,
                 0,
@@ -248,98 +249,98 @@ const tableInsertQuery = {
             );
         `)
     },
-    bookmarkListTableInsertQuery: (req) => {
+    bookmarkListTableInsertQuery: (body) => {
         return (
         `
             insert into bookmarklist values (
-                ${req.body.user_id},
-                \'${req.body.bookmark_post_url}\'
+                ${body.user_id},
+                \'${body.bookmark_post_url}\'
             );
         `)
     },
-    writePostTableInsertQuery: (req) => {
+    writePostTableInsertQuery: (body) => {
         return (
         `
             insert into writepost values (
-                ${req.body.user_id},
-                \'${req.body.post_url}\',
+                ${body.user_id},
+                \'${body.post_url}\',
             );
         `)
     },
-    coinAssetListTableInsertQuery: (req) => {
+    coinAssetListTableInsertQuery: (body) => {
         return (
         `
             insert into coinassetlist values (
-                ${req.body.user_id},
-                \'${req.body.coin_exchange_name}\',
-                \'${req.body.coin_asset_name}\',
-                ${req.body.coin_asset_value}
+                ${body.user_id},
+                \'${body.coin_exchange_name}\',
+                \'${body.coin_asset_name}\',
+                ${body.coin_asset_value}
             );
         `)
     },
-    stockAssetListTableInsertQuery: (req) => {
+    stockAssetListTableInsertQuery: (body) => {
         return (
         `
             insert into stockassetlist values (
-                ${req.body.user_id},
-                \'${req.body.securities_firm_name}\',
-                \'${req.body.virtual_account}\',
-                \'${req.body.stock_name}\',
-                ${req.body.stock_value}
+                ${body.user_id},
+                \'${body.securities_firm_name}\',
+                \'${body.virtual_account}\',
+                \'${body.stock_name}\',
+                ${body.stock_value}
             );
         `)
     },
-    rankingTableInsertQuery: (req) => {
+    rankingTableInsertQuery: (body) => {
         return (
         `
             insert into ranking values (
-                ${req.body.user_id},
-                \'${req.body.category}\',
-                \'${req.body.rank1_id}\',
-                \'${req.body.rank2_id}\',
-                \'${req.body.rank3_id}\',
-                \'${req.body.rank4_id}\',
-                \'${req.body.rank5_id}\',
+                ${body.user_id},
+                \'${body.category}\',
+                \'${body.rank1_id}\',
+                \'${body.rank2_id}\',
+                \'${body.rank3_id}\',
+                \'${body.rank4_id}\',
+                \'${body.rank5_id}\',
                 
             );
         `)
     },
-    shortPostTableInsertQuery: (req) => {
+    shortPostTableInsertQuery: (body) => {
         return (
         `
             insert into shortpost values (
-                ${req.body.short_post_id},
-                \'${req.body.content}\',
+                ${body.short_post_id},
+                \'${body.content}\',
                 0,
                 0
             )
         `)
     },
-    followingTableInsertQuery: (req) => {
+    followingTableInsertQuery: (body) => {
         return (
         `
             insert into following values (
-                ${req.body.user_id},
-                \'${req.body.following_id}\'
+                ${body.user_id},
+                \'${body.following_id}\'
             );
         `)
     },
-    followerTableInsertQuery: (req) => {
+    followerTableInsertQuery: (body) => {
         return (
         `
             insert into follower values (
-                ${req.body.user_id},
-                \'${req.body.follower_id}\'
+                ${body.user_id},
+                \'${body.follower_id}\'
             );
         `)
     },
-    virtualAccountNumberListTableInsertQuery: (req) => {
+    virtualAccountNumberListTableInsertQuery: (body) => {
         return (
         `
             insert into virtualaccountnumberlist values (
-                ${req.body.user_id},
-                \'${req.body.virtual_account_number}\',
-                \'${req.body.securities_firm_name}\'
+                ${body.user_id},
+                \'${body.virtual_account_number}\',
+                \'${body.securities_firm_name}\'
             );
         `)
     }
@@ -347,43 +348,43 @@ const tableInsertQuery = {
 
 const updateQuery = {
     // TODO 업데이트하는 쿼리 추가
-    likesUpdateQuery: (req) => {
+    likesUpdateQuery: (body) => {
         return (
         `
-        update ${req.table} set likes = likes + 1 where postid = \'${req.postid}\';
+        update ${body.table} set likes = likes + 1 where postid = \'${body.post_id}\';
         `)
     },
-    dislikesUpdateQuery: (req) => {
+    dislikesUpdateQuery: (body) => {
         return (
         `
-        update ${req.table} set dislikes = dislikes + 1 where postid = \'${req.postid}\';
+        update ${body.table} set dislikes = dislikes + 1 where postid = \'${body.post_id}\';
         `)
     },
-    voteYesUpdateQuery: (req) => {
+    voteYesUpdateQuery: (body) => {
         return (
         `
-        update VoteBoard set yes = yes + 1 where voteid = \'${req.voteid}\';
+        update VoteBoard set yes = yes + 1 where voteid = \'${body.vote_id}\';
         `)
     },
-    voteYesUpdateQuery: (req) => {
+    voteYesUpdateQuery: (body) => {
         return (
         `
-            update VoteBoard set no = no + 1 where voteid = \'${req.voteid}\';
+            update VoteBoard set no = no + 1 where voteid = \'${body.vote_id}\';
         `)
     }
 }
 
 const deleteQuery = {
-    followingTableDropQuery: (req) => {
+    followingTableDropQuery: (body) => {
         return (
         `
-            Delete from following where userid = \'${req.userid}\' and followingid = \'${req.followingid}\';
+            Delete from following where userid = \'${body.user_id}\' and followingid = \'${body.following_id}\';
         `)
     },
-    followerTableDropQuery: (req) => {
+    followerTableDropQuery: (body) => {
         return (
         `
-            Delete from follower where userid = \'${req.userid}\' and followerid = \'${req.followerid}\';
+            Delete from follower where userid = \'${body.user_id}\' and followerid = \'${body.follower_id}\';
         `)
     }
 }

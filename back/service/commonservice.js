@@ -68,22 +68,10 @@ const DBConnect = () => {
 }
 
 
-const temp = () => {
-    const req = {
-        body : {
-            post_id : "user0001",
-            title : "hello world",
-            content : "something",
-            username : "ywk", 
-            date : "2021-07-30",
-            category : "shortPost", 
-            pics : "lsdkdjlf.png",
-            files : "sldkjlsf.png"
-        }
-    }
-    const result = queryString.tableInsertQuery.boardCommonTableInsertQuery(req);
-    console.log(result);
+exports.temp = (req, res) => {
+    
 }
+
 
 // dropTable();
 // makeTable();
