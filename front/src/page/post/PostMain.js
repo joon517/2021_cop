@@ -18,7 +18,7 @@ import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // import { CenterFocusStrong } from '@material-ui/icons';
 
-
+import BNavigation from '../BNavigation';
 
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -41,10 +41,11 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 const useStyles = makeStyles({
   root: {
     // width: 'relative',
-    position: 'fixed',
+    position: 'sticky',
     bottom: 0,
     right: 50,
     left: 50,
+    // zIndex: 500,
     // backgroundColor: 'grey',
   },
 });
@@ -52,6 +53,11 @@ const useStyles = makeStyles({
 const useStylesBar = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+    position: 'sticky',
+    top:0,
+    right:50,
+    left:50,
+    zIndex:50,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -286,17 +292,14 @@ export default function LabelBottomNavigation() {
       {/* <br/> */}
       {/* <h2 align="center">게시판</h2> */}
       <PostView />
-      <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-        {/* <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} /> */}
+      <BNavigation />
+      {/* <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
         <BottomNavigationAction label="홈" value="home" icon={<HomeIcon />} />
         <BottomNavigationAction label="검색" value="search" icon={<SearchIcon />} />
         <BottomNavigationAction label="새글작성" value="create" icon={<CreateIcon />} />
         <BottomNavigationAction label="북마크" value="bookmark" icon={<BookmarkBorderIcon />} />
         <BottomNavigationAction label="더보기" value="more" icon={<MoreHorizIcon />} />
-        {/* <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} /> */}
-        {/* <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon />} /> */}
-        {/* <BottomNavigationAction label="Folder" value="folder" icon={<FolderIcon />} /> */}
-      </BottomNavigation>
+      </BottomNavigation> */}
     </>
   )
 }

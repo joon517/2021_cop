@@ -5,35 +5,51 @@ const postList = [
     "title": "첫번째 게시글입니다.",
     "content": "첫번째 게시글 내용입니다.",
     "createDate": "2020-10-25",
-    "readCount": 6
+    "readCount": 6,
+    "commentCount": 1,
+    "likes": 1,
+    "dislikes":1
+
   },
   {
     "no": 2,
     "title": "두번째 게시글입니다.",
     "content": "두번째 게시글 내용입니다.",
     "createDate": "2020-10-25",
-    "readCount": 5
+    "readCount": 5,
+    "commentCount": 5,
+    "likes": 53,
+    "dislikes":1
   },
   {
     "no": 3,
     "title": "세번째 게시글입니다.",
     "content": "세번째 게시글 내용입니다.",
     "createDate": "2020-10-25",
-    "readCount": 1
+    "readCount": 1,
+    "commentCount": 1,
+    "likes": 1,
+    "dislikes":1
   },
   {
     "no": 4,
     "title": "네번째 게시글입니다.",
     "content": "네번째 게시글 내용입니다.",
     "createDate": "2020-10-25",
-    "readCount": 2
+    "readCount": 2,
+    "commentCount": 1,
+    "likes": 1,
+    "dislikes":1
   },
   {
     "no": 5,
-    "title": "다섯번째 게시글입니다.",
-    "content": "다섯번째 게시글 내용입니다.",
+    "title": "COP",
+    "content": "어려어ㅜ어어어어ㅓ웅어워",
     "createDate": "2020-10-25",
-    "readCount": 4
+    "readCount": 4,
+    "commentCount": 1,
+    "likes": 1,
+    "dislikes":1
   },
 ];
 
