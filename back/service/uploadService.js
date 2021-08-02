@@ -1,36 +1,91 @@
 const queryString = require('../models/query')
+const mariadb = require('mariadb')
 
-// req_body 예시
-// {
-// "post_id" : 123456798,
-// "comment_id" : 12345,
-// "comment" : "hello world",
-// "content" : "something",
-// "username" : "ywk", 
-// "date" : "2021-07-30",
-// "category" : "shortPost", 
-// "pics" : "lsdkdjlf.png",
-// "files" : "sldkjlsf.png"
-// }
+// TODO procces.env처리
+// TODO AWS 데이터베이스 연결
+const pool = mariadb.createPool({
+    host: "127.0.0.1",
+    user: "kimyoungwoo",
+    port: 3306,
+    database: "mysql",
+    password: "!qksgufahs2"
+})
 
+// TODO 시간부분 NOW()로 할지 고민 해보기
+
+const QueryInsert = (Query, res) => {
+    // MariaDB 연결해서 쿼리 날리는 부분
+    pool.getConnection()
+        .then(conn => {
+            conn.query(Query)
+                .catch(err => console.error(err))
+            conn.end()
+        })
+        .catch(err => {
+            res.status(500).send("Fail Insert")
+            console.error(err)
+            conn.end();
+        })
+        .finally(() => {
+            res.status(200).send("Success Insert");
+        })
+}
 exports.uploadCommonBoard = (req, res) => {
-    // TODO 공통 게시판 업로드 기능 구현
-    console.log(req.body);
-    // TODO 함수 이름도 ${req.함수이름}으로 바꾸기
-    const result = queryString.tableInsertQuery.commentsTableInsertQuery(req.body)
-    console.log(result);
-    console.log(typeof(result))
-    res.status(200).send("hello world");
-
-    // TODO MariaDB연결해서 쿼리 날리는 부분 추가
-    
+    const result = queryString.tableInsertQuery.boardCommonTableInsertQuery(req.body)
+    QueryInsert(result, res);
 }
 
 exports.uploadVoteBoard = (req, res) => {
-    // TODO 투표 게시판 업로드 기능 구현
+    const result = queryString.tableInsertQuery.voteBoardTableInsertQuery(req.body)
+    QueryInsert(result, res);
 }
 
 exports.uploadComment = (req, res) => {
-    // TODO 댓글 업로드 기능 구현
+    const result = queryString.tableInsertQuery.commentsTableInsertQuery(req.body)
+    QueryInsert(result, res);
 }
 
+exports.uploadUser = (req, res) => {
+    const result = queryString.tableInsertQuery.userTableInsertQuery(req.body)
+    QueryInsert(result, res);
+}
+
+exports.uploadBookmarkList = (req, res) => {
+    const result = queryString.tableInsertQuery.bookmarkListTableInsertQuery(req.body)
+    QueryInsert(result, res);
+}
+
+exports.uploadCoinAssetList = (req, res) => {
+    const result = queryString.tableInsertQuery.coinAssetListTableInsertQuery(req.body)
+    QueryInsert(result, res);
+}
+
+exports.uploadStockAssetList = (req, res) => {
+    const result = queryString.tableInsertQuery.stockAssetListTableInsertQuery(req.body)
+    QueryInsert(result, res);
+}
+
+exports.uploadRanking = (req, res) => {
+    const result = queryString.tableInsertQuery.rankingTableInsertQuery(req.body)
+    QueryInsert(result, res);
+}
+
+exports.uploadShortPost = (req, res) => {
+    const result = queryString.tableInsertQuery.shortPostTableInsertQuery(req.body)
+    QueryInsert(result, res);
+}
+
+exports.uploadFollowing = (req, res) => {
+    const result = queryString.tableInsertQuery.followingTableInsertQuery(req.body)
+    QueryInsert(result, res);
+}
+
+exports.uploadFollower = (req, res) => {
+    const result = queryString.tableInsertQuery.followerTableInsertQuery(req.body)
+    QueryInsert(result, res);
+}
+
+exports.uploadVirtualAccountNumber = (req, res) => {
+    const result = queryString.tableInsertQuery.virtualAccountNumberListTableInsertQuery(req.body)
+    QueryInsert(result, res);
+}

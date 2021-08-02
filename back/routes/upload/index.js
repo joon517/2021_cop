@@ -12,12 +12,47 @@ router.post('/:name', (req, res) => {
     switch (functionName) {
         case "commonBoard" : {
             uploadService.uploadCommonBoard(req, res);
+            break;
         }
-        case "shortPost" : {
+        case "vote" : {
             uploadService.uploadVoteBoard(req, res);
+            break;
         }
         case "comment" : {
             uploadService.uploadComment(req, res);
+            break;
+        }
+        case "user" : {
+            uploadService.uploadUser(req, res);
+            break;
+        }
+        case "bookmarkList" : {
+            uploadService.uploadBookmarkList(req, res);
+            break;
+        }
+        case "coinAssetList" : {
+            uploadService.uploadCoinAssetList(req, res);
+            break;
+        }
+        case "stockAssetList" : {
+            uploadService.uploadStockAssetList(req, res);
+            break;
+        }
+        case "ranking" : {
+            uploadService.uploadRanking(req, res);
+            break;
+        }
+        case "shortPost" : {
+            uploadService.uploadShortPost(req, res);
+            break;
+        }
+        case "following" : {
+            uploadService.uploadFollowing(req, res);
+            break;
+        }
+        case "follower" : {
+            uploadService.uploadFollower(req, res);
+            break;
         }
     }
 })

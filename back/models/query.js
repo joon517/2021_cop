@@ -20,8 +20,8 @@ const tableCreateQuery = {
         category varchar(20) not null,
         isbookmark boolean default false,
         reportcount int default 0,
-        pics int(11) ,
-        files int(11) ,
+        pics varchar(100) ,
+        files varchar(100) ,
         isselfdelete boolean default false,
         isforcedelete boolean default false
     );
@@ -40,8 +40,8 @@ const tableCreateQuery = {
             dislikes int(11) default 0,
             isbookmark boolean default false,
             reportcount int default 0,
-            pics int(11) ,
-            files int(11) ,
+            pics varchar(100) ,
+            files varchar(100) ,
             isselfdelete boolean default false,
             isforcedelete boolean default false,
             constraint comments primary key(postid, commentid)
@@ -63,7 +63,7 @@ const tableCreateQuery = {
     `
     CREATE TABLE users
     (
-        userid int(11) not null primary key,
+        userid varchar(20) not null primary key,
         username varchar(20) not null,
         password varchar(256) not null,
         isvalidasset boolean default false,
@@ -81,7 +81,7 @@ const tableCreateQuery = {
     `
     CREATE TABLE bookmarklist
     (
-        userid int(11) not null,
+        userid varchar(20) not null,
         bookmarkposturl varchar(100) not null,
         constraint bookmarklist primary key(userid, bookmarkposturl)
     );
@@ -91,7 +91,7 @@ const tableCreateQuery = {
     `
     CREATE TABLE writepost
     (
-        userid int(11) not null,
+        userid varchar(20) not null,
         posturl varchar(100) not null,
         constraint writepost primary key(userid, posturl)
     );
@@ -101,9 +101,9 @@ const tableCreateQuery = {
     `
     CREATE TABLE coinassetlist
     (
-        userid int(11) not null,
+        userid varchar(20) not null,
         coinexchangename varchar(20) not null,
-        coinassetname varchar(2) not null,
+        coinassetname varchar(20) not null,
         coinassetvalue int(11) default 0,
         constraint coinassetlist primary key(userid, coinexchangename, coinassetname)
     );
@@ -113,7 +113,7 @@ const tableCreateQuery = {
     `
     CREATE TABLE stockassetlist
     (
-        userid int(11) not null,
+        userid varchar(20) not null,
         securitiesfirmname varchar(20) not null,
         virtualaccount  varchar(20),
         stockname varchar(20) not null,
@@ -149,7 +149,7 @@ const tableCreateQuery = {
         `
     CREATE TABLE following
     (
-        userid int(11) not null,
+        userid varchar(20) not null,
         followingid varchar(20) not null,
         constraint following primary key(userid, followingid)
     );
@@ -159,7 +159,7 @@ const tableCreateQuery = {
         `
     CREATE TABLE follower
     (
-        userid int(11) not null,
+        userid varchar(20) not null,
         followerid varchar(20) not null,
         constraint follower primary key(userid, followerid)
     );
@@ -169,7 +169,7 @@ const tableCreateQuery = {
         `
     CREATE TABLE virtualaccountnumberlist
     (
-        userid int(11) not null,
+        userid varchar(20) not null,
         virtualaccountnumber varchar(20) not null,
         securitiesfirmname varchar(20),
         constraint virtualaccountnumberlist primary key(userid, securitiesfirmname)
@@ -184,15 +184,15 @@ const tableInsertQuery = {
                 ${body.post_id},
                 \'${body.title}\',
                 \'${body.content}\',
-                \'${body.username}\',
+                \'${body.user_name}\',
                 \'${body.date}\',
                 0,
                 0,
                 \'${body.category}\',
                 false,
                 0,
-                ${body.pics},
-                ${body.files},
+                \'${body.pics}\',
+                \'${body.files}\',
                 false,
                 false
             );
@@ -205,14 +205,14 @@ const tableInsertQuery = {
                 ${body.post_id},
                 ${body.comment_id},
                 \'${body.content}\',
-                \'${body.username}\',
+                \'${body.user_name}\',
                 \'${body.date}\',
                 0,
                 0,
                 false,
                 0,
-                ${body.pics},
-                ${body.files},
+                \'${body.pics}\',
+                \'${body.files}\',
                 false,
                 false
             );
@@ -224,7 +224,7 @@ const tableInsertQuery = {
             insert into voteboard values (
                 ${body.vote_id},
                 \'${body.vote_name}\',
-                \'${body.username}\',
+                \'${body.user_name}\',
                 0,
                 0
             );
@@ -233,11 +233,11 @@ const tableInsertQuery = {
     userTableInsertQuery: (body) => {
         return (
         `
-            insert into user values (
-                ${body.user_id},
-                \'${body.username}\',
+            insert into users values (
+                \'${body.user_id}\',
+                \'${body.user_name}\',
                 \'${body.password}\',
-                ${body.is_valid_asset}
+                ${body.is_valid_asset},
                 \'${body.badge}\',
                 \'${body.personal_info_openrule}\',
                 0,
@@ -253,7 +253,7 @@ const tableInsertQuery = {
         return (
         `
             insert into bookmarklist values (
-                ${body.user_id},
+                \'${body.user_id}\',
                 \'${body.bookmark_post_url}\'
             );
         `)
@@ -262,7 +262,7 @@ const tableInsertQuery = {
         return (
         `
             insert into writepost values (
-                ${body.user_id},
+                \'${body.user_id}\',
                 \'${body.post_url}\',
             );
         `)
@@ -271,7 +271,7 @@ const tableInsertQuery = {
         return (
         `
             insert into coinassetlist values (
-                ${body.user_id},
+                \'${body.user_id}\',
                 \'${body.coin_exchange_name}\',
                 \'${body.coin_asset_name}\',
                 ${body.coin_asset_value}
@@ -282,7 +282,7 @@ const tableInsertQuery = {
         return (
         `
             insert into stockassetlist values (
-                ${body.user_id},
+                \'${body.user_id}\',
                 \'${body.securities_firm_name}\',
                 \'${body.virtual_account}\',
                 \'${body.stock_name}\',
@@ -294,14 +294,13 @@ const tableInsertQuery = {
         return (
         `
             insert into ranking values (
-                ${body.user_id},
+                ${body.rank_id},
                 \'${body.category}\',
                 \'${body.rank1_id}\',
                 \'${body.rank2_id}\',
                 \'${body.rank3_id}\',
                 \'${body.rank4_id}\',
-                \'${body.rank5_id}\',
-                
+                \'${body.rank5_id}\'
             );
         `)
     },
@@ -320,7 +319,7 @@ const tableInsertQuery = {
         return (
         `
             insert into following values (
-                ${body.user_id},
+                \'${body.user_id}\',
                 \'${body.following_id}\'
             );
         `)
@@ -329,7 +328,7 @@ const tableInsertQuery = {
         return (
         `
             insert into follower values (
-                ${body.user_id},
+                \'${body.user_id}\',
                 \'${body.follower_id}\'
             );
         `)
@@ -338,7 +337,7 @@ const tableInsertQuery = {
         return (
         `
             insert into virtualaccountnumberlist values (
-                ${body.user_id},
+                \'${body.user_id}\',
                 \'${body.virtual_account_number}\',
                 \'${body.securities_firm_name}\'
             );
@@ -378,13 +377,13 @@ const deleteQuery = {
     followingTableDropQuery: (body) => {
         return (
         `
-            Delete from following where userid = \'${body.user_id}\' and followingid = \'${body.following_id}\';
+            Delete from following where userid = \'\'${body.user_id}\'\' and followingid = \'${body.following_id}\';
         `)
     },
     followerTableDropQuery: (body) => {
         return (
         `
-            Delete from follower where userid = \'${body.user_id}\' and followerid = \'${body.follower_id}\';
+            Delete from follower where userid = \'\'${body.user_id}\'\' and followerid = \'${body.follower_id}\';
         `)
     }
 }
