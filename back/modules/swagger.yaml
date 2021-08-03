@@ -1,0 +1,66 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: FASTMVPCOP
+host: localhost:3000
+basePath: /app/v1
+schemas:
+  - update
+  - upload
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /upload/{name}:
+    post:
+      description: "업로드 예시"
+      parameters:
+        - in: path
+        required: true
+        schema:
+          $ref: '#/components/schema/update'
+      responses:
+        "200":
+          description: "성공"
+          schema:
+            $ref: "#/components/schema/Success"
+        "500":
+          description: "실패"
+          schema:
+            $ref: "#/components/schema/Fail"
+
+components:
+  schema:
+    Success:
+      type: string
+      description : "success"
+    Fail:
+      type: string
+      description : "Fail"
+    update:
+      properties:
+        post_id:
+          type: integer
+          description : 게시글ID
+        comment_id:
+          type : integer
+          description : 댓글ID
+        comment:
+          type : string
+          description : 댓글 내용
+        content:
+          type : string
+          description : 내용
+        date:
+          type : string
+          description : 날짜
+        category:
+          type : string
+          description : 카테고리
+        pics:
+          type : string
+          description : 사진
+        files:
+          type : string
+          description : 파일

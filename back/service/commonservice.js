@@ -10,6 +10,7 @@ const pool = mariadb.createPool({
     database:"mysql",
     password: "!qksgufahs2" 
 })
+// CREATE USER 'kimyoungwoo'@'%' identified by '!qksgufahs2';
 // GRANT ALL PRIVILEGES ON *.* TO kimyoungwoo@'localhost' IDENTIFIED BY '!qksgufahs2';
 
 // 테이블 삭제

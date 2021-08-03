@@ -4,15 +4,15 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const options = {
     swaggerDefinition : {
         info : {
-            title : "TEST API",
+            title : "FASTMVPCOP TEST API",
             version : "1.0.0",
             description : "FastmvpCOP REST API TEST"
         },
         host : "localhost:3000",
-        basePath : '/'
+        basePath : '/app/v1'
     },
     apis : [
-        '../routes/*.js', './swagger/*'
+        '../routes/index.js', '../routes/upload/index.js', '../routes/update/index.js', './swagger.yaml'
     ]
 }
 
