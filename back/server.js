@@ -2,13 +2,16 @@ const express = require('express');
 const winston = require('winston');
 const Router = require('./routes/index')
 const app = express();
+const {swaggerUi, specs} = require('./modules/swagger');
 
+// TODO process.env 처리
 const port = 3000;
 const logger = winston.createLogger();
 
 app.use(express.json());
 // app.use(bodyparser.urlencoded({extended:false}))
 app.use('/', Router);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 //TODO port => process.env.port 처리하기
 app.listen( port, () => {

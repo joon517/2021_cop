@@ -1,4 +1,4 @@
-const queryString = require('../models/query')
+const queryString = require('../modules/query')
 const mariadb = require('mariadb')
 
 // TODO procces.env처리
@@ -16,19 +16,18 @@ const pool = mariadb.createPool({
 const QueryInsert = (Query, res) => {
     // MariaDB 연결해서 쿼리 날리는 부분
     pool.getConnection()
-        .then(conn => {
+    .then(conn => {
             conn.query(Query)
-                .catch(err => console.error(err))
-            conn.end()
-        })
-        .catch(err => {
-            res.status(500).send("Fail Insert")
-            console.error(err)
-            conn.end();
-        })
-        .finally(() => {
-            res.status(200).send("Success Insert");
-        })
+            .catch(err => console.error(err))
+        conn.release()
+    })
+    .catch(err => {
+        res.status(500).send("Fail Insert")
+        console.error(err)
+    })
+    .finally( () => {
+        res.status(200).send("Success Insert");
+    })
 }
 exports.uploadCommonBoard = (req, res) => {
     const result = queryString.tableInsertQuery.boardCommonTableInsertQuery(req.body)

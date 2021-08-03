@@ -1,15 +1,16 @@
 const mariadb = require('mariadb')
-const queryString = require('../models/query')
+const queryString = require('../modules/query')
 
 
 //TODO procces.env처리
 const pool = mariadb.createPool({
     host: "127.0.0.1", 
-    user:  process.env.USER, 
+    user:  "kimyoungwoo", 
     port:3306,
     database:"mysql",
     password: "!qksgufahs2" 
 })
+// GRANT ALL PRIVILEGES ON *.* TO kimyoungwoo@'localhost' IDENTIFIED BY '!qksgufahs2';
 
 // 테이블 삭제
 const dropTable = () => {
@@ -20,13 +21,11 @@ const dropTable = () => {
             conn.query(`DROP TABLE IF EXISTS ${queryString.dropTableQuery.dropAllTables[i]};`)
             .catch(err => console.error(err))
         }
-        conn.end()
+        conn.release();
     })
     .catch(err => {
         console.error(err)
-        conn.end();
     })
-    return;
 }
 
 // 테이블 만드는 함수
@@ -44,13 +43,11 @@ const makeTable = () => {
                 console.error(err);
             })
         }
-        conn.end();
+        conn.release();
     })
     .catch(err => {
         console.error(err)
-        conn.end();
     })
-    return;
 }
 
 const DBConnect = () => {
@@ -61,10 +58,7 @@ const DBConnect = () => {
     })
     .catch(err => {
         console.error(err)
-        conn.end();
-        return;
     })
-    return;
 }
 
 
