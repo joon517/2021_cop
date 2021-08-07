@@ -37,6 +37,10 @@ router.post('/:name', (req, res) => {
         case "follower" : {
             updateService.updateFollower(req, res);
         }
+        default : {
+            res.status(500).send("Wrong Approach");
+            break;
+        }
     }
 })
 

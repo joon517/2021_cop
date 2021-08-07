@@ -2,7 +2,7 @@ const mariadb = require('mariadb')
 const queryString = require('../modules/query')
 
 
-//TODO procces.env처리
+// TODO 파일 삭제 예정
 const pool = mariadb.createPool({
     host: "127.0.0.1", 
     user:  "kimyoungwoo", 

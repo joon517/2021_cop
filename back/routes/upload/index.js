@@ -54,6 +54,10 @@ router.post('/:name', (req, res) => {
             uploadService.uploadFollower(req, res);
             break;
         }
+        default : {
+            res.status(500).send("Wrong Approach");
+            break;
+        }
     }
 })
 

@@ -3,7 +3,7 @@ const router = express.Router();
 
 const binanceRouter = require('./binance');
 const upbitRouter = require('./upbit');
-const commonRouter = require('./common');
+const deleteRouter = require('./delete');
 const authRouter = require('./auth');
 const uploadRouter = require('./upload');
 const updateRouter = require('./update');
@@ -14,8 +14,8 @@ router.use('/app/v1/binance/', (req, res) => {
 router.use('/app/v1/upbit/', (req, res) => {
     upbitRouter(req, res);
 });
-router.use('/app/v1/common/', (req, res) => {
-    commonRouter(req, res);
+router.use('/app/v1/delete/', (req, res) => {
+    deleteRouter(req, res);
 })
 router.use('/app/v1/auth/', (req, res) => {
     authRouter(req, res);
