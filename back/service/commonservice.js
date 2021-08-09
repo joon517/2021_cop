@@ -1,6 +1,8 @@
 const mariadb = require('mariadb')
 const queryString = require('../modules/query')
 
+const color = ['빨강', '주황', '노랑', '초록', '파랑', '남색', '보라']
+// TODO 명사 추가
 
 // TODO 파일 삭제 예정
 const pool = mariadb.createPool({
@@ -62,11 +64,10 @@ const DBConnect = () => {
     })
 }
 
+// TODO 랜덤 닉네임 생성 구현
+const makeRandomNickname = (req, res) => {
 
-exports.temp = (req, res) => {
-    
 }
-
 
 // dropTable();
 // makeTable();
