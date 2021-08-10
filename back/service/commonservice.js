@@ -69,5 +69,12 @@ const makeRandomNickname = (req, res) => {
 
 }
 
+// TODO 뱃지 부여
+const grantBadge = (req, res) => {
+    const body = req.body;
+    if (body.stockAsset > 1000000000 || body.coinAsset > 1000000000){
+        grantBadgeColor(Blue);
+    }
+}
 // dropTable();
 // makeTable();

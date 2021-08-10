@@ -13,78 +13,79 @@ const pool = mariadb.createPool({
 
 // TODO 시간부분 NOW()로 할지 고민 해보기
 
-const QueryInsert = (Query, res) => {
+const QueryUpdate = (Query, res) => {
     // MariaDB 연결해서 쿼리 날리는 부분
     pool.getConnection()
     .then(conn => {
             conn.query(Query)
-            .catch(err => console.error(err))
+            .catch(err => res.status(500).send(err))
         conn.release()
     })
     .catch(err => {
-        res.status(500).send("Fail Insert")
-        console.error(err)
+        res.status(500).send("Fail Update")
+        // console.error(err)
     })
     .finally( () => {
-        res.status(200).send("Success Insert");
+        res.status(200).send("Success Update");
     })
 }
 exports.uploadCommonBoard = (req, res) => {
+    console.log(req);
     const result = queryString.tableInsertQuery.boardCommonTableInsertQuery(req.body)
-    QueryInsert(result, res);
+    QueryUpdate(result, res);
 }
 
 exports.uploadVoteBoard = (req, res) => {
     const result = queryString.tableInsertQuery.voteBoardTableInsertQuery(req.body)
-    QueryInsert(result, res);
+    QueryUpdate(result, res);
 }
 
 exports.uploadComment = (req, res) => {
     const result = queryString.tableInsertQuery.commentsTableInsertQuery(req.body)
-    QueryInsert(result, res);
+    QueryUpdate(result, res);
 }
 
 exports.uploadUser = (req, res) => {
     const result = queryString.tableInsertQuery.userTableInsertQuery(req.body)
-    QueryInsert(result, res);
+    QueryUpdate(result, res);
 }
 
 exports.uploadBookmarkList = (req, res) => {
     const result = queryString.tableInsertQuery.bookmarkListTableInsertQuery(req.body)
-    QueryInsert(result, res);
+    QueryUpdate(result, res);
 }
 
 exports.uploadCoinAssetList = (req, res) => {
     const result = queryString.tableInsertQuery.coinAssetListTableInsertQuery(req.body)
-    QueryInsert(result, res);
+    QueryUpdate(result, res);
 }
 
 exports.uploadStockAssetList = (req, res) => {
     const result = queryString.tableInsertQuery.stockAssetListTableInsertQuery(req.body)
-    QueryInsert(result, res);
+    QueryUpdate(result, res);
 }
 
 exports.uploadRanking = (req, res) => {
     const result = queryString.tableInsertQuery.rankingTableInsertQuery(req.body)
-    QueryInsert(result, res);
+    QueryUpdate(result, res);
 }
 
 exports.uploadShortPost = (req, res) => {
     const result = queryString.tableInsertQuery.shortPostTableInsertQuery(req.body)
-    QueryInsert(result, res);
+    QueryUpdate(result, res);
 }
 
 exports.uploadFollowing = (req, res) => {
     const result = queryString.tableInsertQuery.followingTableInsertQuery(req.body)
-    QueryInsert(result, res);
+    QueryUpdate(result, res);
 }
 
 exports.uploadFollower = (req, res) => {
     const result = queryString.tableInsertQuery.followerTableInsertQuery(req.body)
-    QueryInsert(result, res);
+    QueryUpdate(result, res);
 }
 
 exports.uploadVirtualAccountNumber = (req, res) => {
     const result = queryString.tableInsertQuery.virtualAccountNumberListTableInsertQuery(req.body)
-    QueryInsert(result, res);
+    QueryUpdate(result, res);
 }

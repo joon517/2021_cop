@@ -7,6 +7,7 @@ const dropTableQuery = {
 
 const tableCreateQuery = {
     // TODO 테이블 쪼개기
+    // TODO 태그 컬럼 추가
     boardCommonTableCreateQuery :
     `CREATE TABLE boardcommon
     (
