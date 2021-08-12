@@ -25,6 +25,8 @@ import CommonTableColumn from '../../component/table/CommonTableColumn';
 import CommonTableRow from '../../component/table/CommonTableRow';
 import { postList } from '../../Data';
 
+import axios from 'axios';
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -60,17 +62,44 @@ const useStyles = makeStyles({
 
 
 const PostView  = props => {
-  const [ dataList, setDataList ] = useState([]);
+  // const [ dataList, setDataList ] = useState([]);
+
+  const [posts, setPosts] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const classes = useStyles();
 
   useEffect(() => {
-    setDataList(postList);
+    // setDataList(postList);
+
+    const fetchPosts = async () => {
+      try {
+        setPosts(null);
+        setError(null);
+        setLoading(true);
+        const response = await axios.get('api주소'); // 게시판 목록 가져오기 (GET, JSON타입 데이터)
+        setPosts(response.data);
+      }
+      catch (e) {
+        setError(e);
+      }
+      setLoading(false);
+    }
+    fetchPosts();
   }, [ ])
-  const classes = useStyles();
+
+  if (loading) return <div>로딩중..</div>
+  if (error) return <div>에러 발생</div>
+  if (!posts) return null;
+
+  // const classes = useStyles();
 
   return (
     <>
            {
-             dataList ? dataList.map((item, index) => {
+            //  dataList ? dataList.map((item, index) => {
+              posts ? posts.map((item, index) => {
               
                return ( 
                  
@@ -187,5 +216,3 @@ export default PostView;
 //     </>
 //   );
 // }
-
-
