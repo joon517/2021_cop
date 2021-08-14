@@ -11,7 +11,7 @@ const pool = mariadb.createPool({
     password: "!qksgufahs2"
 })
 
-const QueryInsert = (Query, res) => {
+const QueryHandler = (Query, res) => {
     // MariaDB 연결해서 쿼리 날리는 부분
     pool.getConnection()
     .then(conn => {
@@ -29,10 +29,10 @@ const QueryInsert = (Query, res) => {
 }
 exports.deleteFollower = (req, res) => {
     const result = queryString.deleteQuery.followerTableDropQuery(req.body);
-    QueryInsert(result, res);
+    QueryHandler(result, res);
 }
 
 exports.deleteFollowing = (req, res) => {
     const result = queryString.deleteQuery.followingTableDropQuery(req.body)
-    QueryInsert(result, res);
+    QueryHandler(result, res);
 }

@@ -1,15 +1,24 @@
 const dropTableQuery = {
-    dropAllTables : [
-        "boardcommon", "comments", "voteboard", "users", "bookmarklist", "writepost", "coinassetlist", 
+    dropAllTables: [
+        "boardcommon", "comments", "voteboard", "users", "bookmarklist", "writepost", "coinassetlist",
         "stockassetlist", "ranking", "shortpost", "follower", "following", "virtualaccountnumberlist"
     ]
 }
+const selectTableQuery = {
+    boardCommonTableSelectQuery: (body) => {
+        return (
+            `
+    SELECT * FROM boardcommon;
+    `
+        )
+    }
 
-const tableCreateQuery = {
+}
+const createTableQuery = {
     // TODO 테이블 쪼개기
     // TODO 태그 컬럼 추가
-    boardCommonTableCreateQuery :
-    `CREATE TABLE boardcommon
+    boardCommonTableCreateQuery:
+        `CREATE TABLE boardcommon
     (
         postid int(11) not null primary key,
         title varchar(20) not null,
@@ -21,15 +30,15 @@ const tableCreateQuery = {
         category varchar(20) not null,
         isbookmark boolean default false,
         reportcount int default 0,
-        pics varchar(100) ,
-        files varchar(100) ,
+        pics varchar(100) default '',
+        files varchar(100) default '',
         isselfdelete boolean default false,
         isforcedelete boolean default false
     );
     `
     ,
-    commentsTableCreateQuery :
-    `
+    commentsTableCreateQuery:
+        `
         CREATE TABLE comments
         (
             postid int(11) not null,
@@ -49,8 +58,8 @@ const tableCreateQuery = {
         );
     `
     ,
-    voteBoardTableCreateQuery :
-    `
+    voteBoardTableCreateQuery:
+        `
     CREATE TABLE voteboard
     (
         voteid int(11) not null primary key, 
@@ -60,8 +69,8 @@ const tableCreateQuery = {
         no int(11) default 0
     );`
     ,
-    userTableCreateQuery :
-    `
+    userTableCreateQuery:
+        `
     CREATE TABLE users
     (
         userid varchar(20) not null primary key,
@@ -78,8 +87,8 @@ const tableCreateQuery = {
         virtualaccount varchar(20) default ''
     );`
     ,
-    bookmarkListTableCreateQuery :
-    `
+    bookmarkListTableCreateQuery:
+        `
     CREATE TABLE bookmarklist
     (
         userid varchar(20) not null,
@@ -88,8 +97,8 @@ const tableCreateQuery = {
     );
     `
     ,
-    writePostTableCreateQuery :
-    `
+    writePostTableCreateQuery:
+        `
     CREATE TABLE writepost
     (
         userid varchar(20) not null,
@@ -98,8 +107,8 @@ const tableCreateQuery = {
     );
     `
     ,
-    coinAssetListTableCreateQuery :
-    `
+    coinAssetListTableCreateQuery:
+        `
     CREATE TABLE coinassetlist
     (
         userid varchar(20) not null,
@@ -110,8 +119,8 @@ const tableCreateQuery = {
     );
     `
     ,
-    stockAssetListTableCreateQuery :
-    `
+    stockAssetListTableCreateQuery:
+        `
     CREATE TABLE stockassetlist
     (
         userid varchar(20) not null,
@@ -123,8 +132,8 @@ const tableCreateQuery = {
     );
     `
     ,
-    rankingTableCreateQuery :
-    `
+    rankingTableCreateQuery:
+        `
     CREATE TABLE ranking
     (
         rankid int(11) not null primary key,
@@ -136,7 +145,7 @@ const tableCreateQuery = {
         rank5id varchar(20)
     );
     `,
-    shortPostTableCreateQuery :
+    shortPostTableCreateQuery:
         `
     CREATE TABLE shortpost
     (
@@ -146,7 +155,7 @@ const tableCreateQuery = {
         dislikes int(11) default 0
     );`
     ,
-    followingTableCreateQuery :
+    followingTableCreateQuery:
         `
     CREATE TABLE following
     (
@@ -156,7 +165,7 @@ const tableCreateQuery = {
     );
     `
     ,
-    followerTableCreateQuery :
+    followerTableCreateQuery:
         `
     CREATE TABLE follower
     (
@@ -166,7 +175,7 @@ const tableCreateQuery = {
     );
     `
     ,
-    virtualAccountNumberListTableCreateQuery :
+    virtualAccountNumberListTableCreateQuery:
         `
     CREATE TABLE virtualaccountnumberlist
     (
@@ -177,16 +186,16 @@ const tableCreateQuery = {
     );`
 }
 
-const tableInsertQuery = {
+const insertTableQuery = {
     boardCommonTableInsertQuery: (body) => {
-        return ( 
-        `
+        return (
+            `
             insert into boardcommon values (
                 ${body.post_id},
                 \'${body.title}\',
                 \'${body.content}\',
                 \'${body.user_name}\',
-                \'${body.date}\',
+                NOW(),
                 0,
                 0,
                 \'${body.category}\',
@@ -201,7 +210,7 @@ const tableInsertQuery = {
     },
     commentsTableInsertQuery: (body) => {
         return (
-        `
+            `
             insert into comments values (
                 ${body.post_id},
                 ${body.comment_id},
@@ -221,7 +230,7 @@ const tableInsertQuery = {
     },
     voteBoardTableInsertQuery: (body) => {
         return (
-        `
+            `
             insert into voteboard values (
                 ${body.vote_id},
                 \'${body.vote_name}\',
@@ -233,7 +242,7 @@ const tableInsertQuery = {
     },
     userTableInsertQuery: (body) => {
         return (
-        `
+            `
             insert into users values (
                 \'${body.user_id}\',
                 \'${body.user_name}\',
@@ -252,7 +261,7 @@ const tableInsertQuery = {
     },
     bookmarkListTableInsertQuery: (body) => {
         return (
-        `
+            `
             insert into bookmarklist values (
                 \'${body.user_id}\',
                 \'${body.bookmark_post_url}\'
@@ -261,7 +270,7 @@ const tableInsertQuery = {
     },
     writePostTableInsertQuery: (body) => {
         return (
-        `
+            `
             insert into writepost values (
                 \'${body.user_id}\',
                 \'${body.post_url}\',
@@ -270,7 +279,7 @@ const tableInsertQuery = {
     },
     coinAssetListTableInsertQuery: (body) => {
         return (
-        `
+            `
             insert into coinassetlist values (
                 \'${body.user_id}\',
                 \'${body.coin_exchange_name}\',
@@ -281,7 +290,7 @@ const tableInsertQuery = {
     },
     stockAssetListTableInsertQuery: (body) => {
         return (
-        `
+            `
             insert into stockassetlist values (
                 \'${body.user_id}\',
                 \'${body.securities_firm_name}\',
@@ -293,7 +302,7 @@ const tableInsertQuery = {
     },
     rankingTableInsertQuery: (body) => {
         return (
-        `
+            `
             insert into ranking values (
                 ${body.rank_id},
                 \'${body.category}\',
@@ -307,7 +316,7 @@ const tableInsertQuery = {
     },
     shortPostTableInsertQuery: (body) => {
         return (
-        `
+            `
             insert into shortpost values (
                 ${body.short_post_id},
                 \'${body.content}\',
@@ -318,7 +327,7 @@ const tableInsertQuery = {
     },
     followingTableInsertQuery: (body) => {
         return (
-        `
+            `
             insert into following values (
                 \'${body.user_id}\',
                 \'${body.following_id}\'
@@ -327,7 +336,7 @@ const tableInsertQuery = {
     },
     followerTableInsertQuery: (body) => {
         return (
-        `
+            `
             insert into follower values (
                 \'${body.user_id}\',
                 \'${body.follower_id}\'
@@ -336,7 +345,7 @@ const tableInsertQuery = {
     },
     virtualAccountNumberListTableInsertQuery: (body) => {
         return (
-        `
+            `
             insert into virtualaccountnumberlist values (
                 \'${body.user_id}\',
                 \'${body.virtual_account_number}\',
@@ -350,25 +359,25 @@ const updateQuery = {
     // TODO 업데이트하는 쿼리 추가
     likesUpdateQuery: (body) => {
         return (
-        `
+            `
         update ${body.table} set likes = likes + 1 where postid = \'${body.post_id}\';
         `)
     },
     dislikesUpdateQuery: (body) => {
         return (
-        `
+            `
         update ${body.table} set dislikes = dislikes + 1 where postid = \'${body.post_id}\';
         `)
     },
     voteYesUpdateQuery: (body) => {
         return (
-        `
+            `
         update VoteBoard set yes = yes + 1 where voteid = \'${body.vote_id}\';
         `)
     },
     voteYesUpdateQuery: (body) => {
         return (
-        `
+            `
             update VoteBoard set no = no + 1 where voteid = \'${body.vote_id}\';
         `)
     }
@@ -377,20 +386,21 @@ const updateQuery = {
 const deleteQuery = {
     followingTableDropQuery: (body) => {
         return (
-        `
+            `
             Delete from following where userid = \'\'${body.user_id}\'\' and followingid = \'${body.following_id}\';
         `)
     },
     followerTableDropQuery: (body) => {
         return (
-        `
+            `
             Delete from follower where userid = \'\'${body.user_id}\'\' and followerid = \'${body.follower_id}\';
         `)
     }
 }
 
+module.exports.selectTableQuery = selectTableQuery;
 module.exports.dropTableQuery = dropTableQuery;
-module.exports.tableCreateQuery = tableCreateQuery;
-module.exports.tableInsertQuery = tableInsertQuery;
+module.exports.createTableQuery = createTableQuery;
+module.exports.insertTableQuery = insertTableQuery;
 module.exports.updateQuery = updateQuery;
 module.exports.deleteQuery = deleteQuery;

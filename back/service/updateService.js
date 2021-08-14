@@ -11,7 +11,7 @@ const pool = mariadb.createPool({
     password: "!qksgufahs2"
 })
 
-const QueryInsert = (Query, res) => {
+const QueryHandler = (Query, res) => {
     // MariaDB 연결해서 쿼리 날리는 부분
     pool.getConnection()
         .then(conn => {
@@ -31,7 +31,7 @@ const QueryInsert = (Query, res) => {
 exports.updateBoard = (req, res) => {
     // TODO 게시판 수정 기능 구현
     const result = queryString.updateQuery
-    QueryInsert(result, res);
+    QueryHandler(result, res);
 }
 
 exports.updateComment = (req, res) => {
