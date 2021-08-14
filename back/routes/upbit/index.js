@@ -4,7 +4,7 @@ const router = express.Router();
 // Import Function
 const func = require('./upbit')
 
-//http://localhost:3000/app/v1/upbit/getUpbitBTCPrice
+//http://localhost:/app/v1/upbit/getUpbitBTCPrice
 router.get('/getUpbitBTC', async (req, res) => {
     await func.getUpbitBTC(req, res);
 });

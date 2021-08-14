@@ -78,8 +78,8 @@ const PostView  = props => {
         setPosts(null);
         setError(null);
         setLoading(true);
-        const response = await axios.get('api주소'); // 게시판 목록 가져오기 (GET, JSON타입 데이터)
-        setPosts(response.data);
+        const response = await axios.post('http://localhost:4000/app/v1/select/commonBoard'); // 게시판 목록 가져오기 (GET, JSON타입 데이터)
+        setPosts(response.data.result);
       }
       catch (e) {
         setError(e);
@@ -88,11 +88,9 @@ const PostView  = props => {
     }
     fetchPosts();
   }, [ ])
-
   if (loading) return <div>로딩중..</div>
   if (error) return <div>에러 발생</div>
   if (!posts) return null;
-
   // const classes = useStyles();
 
   return (

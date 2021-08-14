@@ -88,11 +88,12 @@ class PostNew extends Component {
     // classes = this.useStyles();
     
     postBoard = async () => {
+        // TODO 바디에 user_name 추가해서 보내주세요~
         const { title, content } = this.state;
-        const post = await axios.post('api주소', { // 게시글 쓰기 (POST, JSON)
+        const post = await axios.post('http://localhost:4000/app/v1/upload/commonBoard', { // 게시글 쓰기 (POST, JSON)
             title,
             content,
-        }); 
+        })
         this.setState({
             title: '',
             content: '',

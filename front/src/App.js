@@ -10,6 +10,8 @@ function App() {
         <Route exact path='/postView/:no' component={PostView} />
         <Route exact path='/' component={PostMain} />
         <Route exact path='/postNew' component={PostNew} />
+        {/* TODO 404 페이지 추가해주세용
+        <Route exact path='*' component={PostNew} /> */}
       </BrowserRouter>
     </div>
   );
