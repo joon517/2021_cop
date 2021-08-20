@@ -11,6 +11,7 @@ const pool = mariadb.createPool({
     password: "!qksgufahs2"
 })
 
+var post_idx = 1;
 // TODO 에러 핸들 처리 로직 다시짜기
 const QueryHandler = (Query, res) => {
     // MariaDB 연결해서 쿼리 날리는 부분
@@ -28,10 +29,11 @@ const QueryHandler = (Query, res) => {
     })
     .catch(err => res.status(500).json({"err": err}))
 }
+
 exports.uploadCommonBoard = (req, res) => {
     // console.log(req);
-    // TODO Post_id 생성 로직 추가
-    req.body.post_id = 123;
+    req.body.post_id = post_idx;
+    post_idx = post_idx + 1;
     req.body.user_name= "shp";
     req.body.category = "shortPost"
     const result = queryString.insertTableQuery.boardCommonTableInsertQuery(req.body)

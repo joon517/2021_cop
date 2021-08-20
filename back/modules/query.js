@@ -1,6 +1,6 @@
 const dropTableQuery = {
     dropAllTables: [
-        "boardcommon", "comments", "voteboard", "users", "bookmarklist", "writepost", "coinassetlist",
+        "boardcommon", "boardchangeinfo", "comments", "voteboard", "users", "bookmarklist", "writepost", "coinassetlist",
         "stockassetlist", "ranking", "shortpost", "follower", "following", "virtualaccountnumberlist"
     ]
 }
@@ -25,8 +25,6 @@ const createTableQuery = {
         content text(2000) not null,
         username varchar(20) not null,
         date datetime not null,
-        likes int(11) default 0,
-        dislikes int(11) default 0,
         category varchar(20) not null,
         isbookmark boolean default false,
         reportcount int default 0,
@@ -37,6 +35,19 @@ const createTableQuery = {
     );
     `
     ,
+    boardLikesCreateQuery :
+    `
+    CREATE TABLE boardchangeinfo
+    (
+        postid int(11) primary key,
+        likes int(11) default 0,
+        dislikes int(11) default 0,
+        commentcount int(11) default 0,
+        views int(11) default 0
+    )
+    `
+    ,
+
     commentsTableCreateQuery:
         `
         CREATE TABLE comments
@@ -196,8 +207,6 @@ const insertTableQuery = {
                 \'${body.content}\',
                 \'${body.user_name}\',
                 NOW(),
-                0,
-                0,
                 \'${body.category}\',
                 false,
                 0,
@@ -207,6 +216,15 @@ const insertTableQuery = {
                 false
             );
         `)
+    },
+    boardChangeInfoInsertQuery : (body) => {
+        return (
+            `
+            insert into boardchangeinfo (postid)
+                values (${body.post_id});
+            )
+            `
+        )
     },
     commentsTableInsertQuery: (body) => {
         return (
@@ -357,29 +375,37 @@ const insertTableQuery = {
 
 const updateQuery = {
     // TODO 업데이트하는 쿼리 추가
-    likesUpdateQuery: (body) => {
+    voteYesUpdateQuery: (body) => {
         return (
             `
-        update ${body.table} set likes = likes + 1 where postid = \'${body.post_id}\';
-        `)
-    },
-    dislikesUpdateQuery: (body) => {
-        return (
-            `
-        update ${body.table} set dislikes = dislikes + 1 where postid = \'${body.post_id}\';
+        update voteboard set yes = yes + 1 where voteid = \'${body.vote_id}\';
         `)
     },
     voteYesUpdateQuery: (body) => {
         return (
             `
-        update VoteBoard set yes = yes + 1 where voteid = \'${body.vote_id}\';
+            update voteboard set no = no + 1 where voteid = \'${body.vote_id}\';
         `)
     },
-    voteYesUpdateQuery: (body) => {
+    boardChangeInfoViewsUpdateQuery : (body) => {
         return (
-            `
-            update VoteBoard set no = no + 1 where voteid = \'${body.vote_id}\';
-        `)
+            `update boardchangeinfo set views = views + 1 where postid = \'${body.post_id}\';`
+        )
+    },
+    boardChangeInfoCommentCountUpdateQuery : (body) => {
+        return (
+            `update boardchangeinfo set commentcount = commentcount + 1 where postid = \'${body.post_id}\';`
+        )
+    },
+    boardChangeInfoLikesUpdateQuery : (body) => {
+        return (
+            `update boardchangeinfo set likes = likes + 1 where postid = \'${body.post_id}\';`
+        )
+    },
+    boardChangeInfoDislikesUpdateQuery : (body) => {
+        return (
+            `update boardchangeinfo set dislikes = dislikes + 1 where postid = \'${body.post_id}\';`
+        )
     }
 }
 

@@ -38,12 +38,24 @@ exports.updateComment = (req, res) => {
     // TODO 댓글 수정 기능 구현
 }
 
+exports.updateViews = (req, res) => {
+    const result = queryString.updateQuery.boardChangeInfoViewsUpdateQuery(req.body);
+    QueryHandler(result, res);
+}
+
+exports.updateCommentCount = (req, res) => {
+    const result = queryString.updateQuery.boardChangeInfoCommentCountUpdateQuery(req.body);
+    QueryHandler(result, res);
+}
+
 exports.updateLikes = (req, res) => {
-    // TODO 좋아요 수정 기능 구현
+    const result = queryString.updateQuery.boardChangeInfoLikesUpdateQuery(req.body);
+    QueryHandler(result, res);
 }
 
 exports.updateDislikes = (req, res) => {
-    // TODO 싫어요 수정 기능 구현
+    const result = queryString.updateQuery.boardChangeInfoDislikesUpdateQuery(req.body);
+    QueryHandler(result, res);
 }
 
 exports.updateVoteYes = (req, res) => {

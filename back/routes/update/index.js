@@ -19,6 +19,12 @@ router.post('/:name', (req, res) => {
         case "board" : {
             updateService.updateBoard(req, res);
         }
+        case "Views" : {
+            updateService.updateViews(req, res);
+        }
+        case "CommentCount" : {
+            updateService.updateCommentCount(req, res);
+        }
         case "comment" : {
             updateService.updateComment(req, res);
         }
